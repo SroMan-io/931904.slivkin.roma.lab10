@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Now you see me</title>
+	<style>
+	
+body {
+	margin:0;
+	background: black;
+	overflow: hidden;	
+}
+
+.light {
+	position: absolute;										
+	border-left: 400px solid transparent;
+	border-right: 400px solid transparent;
+	border-bottom: 800px solid gold;
+	opacity: 0;
+	top: 80px;
+	left: calc(50% - 428px);
+	width: 45px;
+	
+	
+	transition: opacity 0.2s ease-in;
+	pointer-events: none;	
+}
+  
+.el1 {
+	position: absolute;
+	top: 75px;
+	left: calc(50% - 53px);
+	border-bottom: 45px solid teal;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;	
+	width: 45px;
+}
+
+.el2 {
+	position: absolute;
+	top: 300px;
+	left: calc(50% - 30.5px);
+	width: 45px;
+	height: 15px;
+	background: lightgray;
+	border-radius: 50% / 100%;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.el3 {
+	position: absolute;
+	top: 290px;
+	left: calc(50% - 17.5px);
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;	
+	background: teal;	
+}
+	
+.el4 {
+	position: absolute;
+	top: 180px;
+	left: calc(50% - 16.5px);
+	width: 20px;
+	height: 11px;
+	background: teal;
+	border-radius: 50%;
+}
+
+.el5 {
+	position: absolute;
+	top: 100px;
+	left: calc(50% - 30px);
+	width: 2px;
+	height: 75px;
+	background: lightgray;
+	
+	transition: transform 0.1s ease-in;
+}
+
+.el6 {
+	position: absolute;
+	top: 175px;
+	left: calc(50% - 34px);
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: gold;
+	
+	transition: transform 0.1s ease-in;
+}
+
+.el7 {
+	position: absolute;
+	top: 100px;
+	left: calc(50% - 9px);
+	width: 5px;
+	height: 85px;
+	background: lightgray;
+}
+
+.el8 {
+	position: absolute;
+	top: 190px;
+	left: calc(50% - 11.5px);
+	width: 10px;
+	height: 115px;
+	background: lightgray;
+}
+
+.magg {	
+	position: absolute;
+	width: 50%;
+	right: 45%;
+	bottom: 10px;
+}
+	
+.hat {
+	position: absolute;	
+	width: 18%;
+	left: 60%;
+	bottom: 10%;
+}
+
+.bird  {
+	position: absolute;
+	width: 8%;
+	left: 65%;
+	bottom: 12%;
+	
+	transition: transform 0.5s ease-in;
+}
+
+.rabbit {
+	position: absolute;	
+	width: 8%;	
+	left: 65%;
+	bottom: 25%;
+	
+	transition: transform 0.5s ease-in;
+}
+
+#focplace {
+	opacity: 0;
+	transition: opacity 0.2s ease-in;
+	
+	position: absolute;
+    width: calc(80vh);
+    height: calc(80vh);
+    left: calc(50% - 40vh);
+	bottom: 75px;	
+}
+
+div.fon {
+	position:absolute;
+	height:100%;
+	width:100%;
+	
+	background: url(1.jpg) no-repeat;		
+	background-size: auto 100%;
+	background-position: bottom center;
+	
+	transition: transform 0.2s ease-in;	
+}
+
+.fon:hover {
+	transform: translate(0, -5%);	
+}
+
+	</style>
+	
+</head>
+
+
+<body>
+
+<script>
+
+var LightInfo = 0;
+
+function focus1(){
+
+	var curt = document.querySelector('.fon');
+	curt.style.transition = "transform 1s linear"
+	curt.style.transform = "translate(0, -100%)";
+
+	focus2(1);
+}
+
+
+function focus2(num){
+
+	var line = document.querySelector('.el5');
+	var ball = document.querySelector('.el6');	
+	var light = document.querySelector('.light');
+	var foc = document.getElementById('focplace');
+
+	lamp.childNodes.forEach(element => {
+	
+		if (element != light) {
+		
+			element.onmousedown = function() {
+		
+				line.style.transform = "translate(0, 10px)";
+				ball.style.transform = "translate(0, 10px)";	
+			}
+	
+			element.onmouseup = function() {
+		
+				line.style.transform = "translate(0, 0px)";
+				ball.style.transform = "translate(0, 0px)";	
+			}
+		}
+	})
+
+	if (num != 1) {
+	
+		if (LightInfo == 0){
+			foc.style.opacity = "1";	
+			light.style.opacity = "0.5";
+			LightInfo = 1;
+		}
+		
+		else {
+			foc.style.opacity = "0";	
+			light.style.opacity = "0";
+			LightInfo = 0;
+		}
+	}
+}		
+		
+
+function focus3(num){
+
+	var rab = document.querySelector('.rabbit');
+	var bird = document.querySelector('.bird');	
+
+	if (num == 1){		
+		rab.style.transform = "translate(0, 200%)";
+		bird.style.transform = "translate(0, -200%)"		
+	}
+		
+	else {
+		bird.style.transform = "translate(0, 0px)";
+		rab.style.transform = "translate(0, 0px)"	
+	}			
+}
+
+</script>
+
+<div id = "focplace">
+	<img class ="magg" src="2.jpg" alt="mag" /> 
+	<img class ="rabbit" src="rabbit.png" alt="bird" onclick = "focus3(1)" />
+	<img class ="bird" src="bird.png" alt="rabbit" onclick = "focus3(2)"/>
+	<img class ="hat" src="hat.png" alt="hat" />
+</div>
+
+<div id = "lamp">
+	<div class = "el8" onclick = "focus2()"></div>
+	<div class = "el3" onclick = "focus2()"></div>
+	<div class = "el2" onclick = "focus2()"></div>
+	<div class = "el5" onclick = "focus2()"></div>
+	<div class = "el6" onclick = "focus2()"></div>
+	<div class = "el7" onclick = "focus2()"></div>
+	<div class = "el4" onclick = "focus2()"></div>
+	<div class = "light"></div>
+	<div class = "el1" onclick = "focus2()"></div>
+</div>
+
+<div class = "fon" onclick = "focus1()"></div>
+
+</body>
+</html>
